@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Livery Angle Calculator</title>
+<style>
+ body { font-family: Arial, sans-serif; margin: 2em; }
+ .calculator { margin-bottom: 2em; }
+ label { display: inline-block; width: 160px; }
+ input[type=number] { width: 80px; }
+ .result { font-weight: bold; margin-left: 1em; }
+</style>
+</head>
+<body>
+<h1>Livery Angle Calculator</h1>
+
+<div class="calculator">
+  <h2>180&deg; Flip</h2>
+  <label for="angle180">Original angle (deg):</label>
+  <input id="angle180" type="number" step="0.1">
+  <button onclick="calcFlip()">Calculate</button>
+  <span id="result180" class="result"></span>
+  <p>This returns the angle to use on the opposite side when the artwork is flipped 180&deg;.</p>
+</div>
+
+<div class="calculator">
+  <h2>45&deg; Adjustment</h2>
+  <label for="angle45">Starting angle (deg):</label>
+  <input id="angle45" type="number" step="0.1">
+  <button onclick="calc45()">Calculate</button>
+  <span id="result45" class="result"></span>
+  <p>This subtracts 45&deg; from the starting angle, wrapping around 360&deg;.</p>
+</div>
+
+<script>
+function calcFlip() {
+  const angle = parseFloat(document.getElementById('angle180').value) || 0;
+  const result = (540 - angle) % 360;
+  document.getElementById('result180').textContent = result.toFixed(1) + '°';
+}
+
+function calc45() {
+  const angle = parseFloat(document.getElementById('angle45').value) || 0;
+  const result = (angle - 45 + 360) % 360;
+  document.getElementById('result45').textContent = result.toFixed(1) + '°';
+}
+</script>
+
+</body>
+</html>
