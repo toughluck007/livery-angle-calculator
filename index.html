@@ -24,13 +24,14 @@
 </div>
 
 <div class="calculator">
-  <h2>Mirror Angle</h2>
-  <label for="angleMirror">Starting angle (deg):</label>
-  <input id="angleMirror" type="number" step="0.1">
-  <button onclick="calcMirror()">Calculate</button>
-  <span id="resultMirror" class="result"></span>
-  <p>This finds the angle of the artwork when mirrored across the car's centerline without rotating it 180&deg;.</p>
+  <h2>90&deg; Rotation</h2>
+  <label for="angleRotate">Starting angle (deg):</label>
+  <input id="angleRotate" type="number" step="0.1">
+  <button onclick="calcRotate()">Calculate</button>
+  <span id="resultRotate" class="result"></span>
+  <p>Adds or subtracts 90&deg; based on the starting angle. For 0&ndash;180&deg; add 90&deg;, otherwise subtract 90&deg;.</p>
 </div>
+
 
 <script>
 function calcFlip() {
@@ -39,10 +40,16 @@ function calcFlip() {
   document.getElementById('result180').textContent = result.toFixed(1) + '°';
 }
 
-function calcMirror() {
-  const angle = parseFloat(document.getElementById('angleMirror').value) || 0;
-  const result = (360 - angle + 360) % 360;
-  document.getElementById('resultMirror').textContent = result.toFixed(1) + '°';
+function calcRotate() {
+  const angle = parseFloat(document.getElementById('angleRotate').value) || 0;
+  let result;
+  if (angle >= 0 && angle < 180) {
+    result = angle + 90;
+  } else {
+    result = angle - 90;
+  }
+  result = (result + 360) % 360;
+  document.getElementById('resultRotate').textContent = result.toFixed(1) + '°';
 }
 </script>
 
